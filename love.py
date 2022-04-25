@@ -1,5 +1,6 @@
+from textwrap import fill
 from tkinter import *
-
+from PIL import ImageTk, Image
 window = Tk()
 
 window.geometry("500x650")
@@ -11,7 +12,7 @@ Gender = StringVar()
 window.title("LOVE 💖 & FRIENDSHIP 🤗 CALCULATOR")
 
 def break_line():
-    return Label(text="\n", background="pink").pack()
+    return Label(text="\n").pack()
 
 def calculate():
     name = yourName.get()
@@ -27,8 +28,6 @@ def calculate():
 
     score = 0  
     vowels=["a","e","i","o","u"]  
-    vowels_name=0  
-    vowels_pname=0
 
     #BOTH FIRST NAME HAVE THE SAME NUMBER OF VALUES
     if len(name) == len(pname):
@@ -71,16 +70,21 @@ def calculate():
     
     Label(text=f"{score}%").pack()
     
+bg =ImageTk.PhotoImage(Image.open("E:\\python\\project\\love_calculator\\bg.jpg"))
 
-heading = Label(text="Calculate your love/friendship with your partner\n", foreground="red", background="pink", font=("Arial",14)).pack()
+pic = Label(window, image=bg).place(x=0,y=0)
+heading = Label(text="Calculate your love/friendship with your partner\n", foreground="red", background="pink", font=("Arial",14)).pack(pady=20)
 your_name = Label(text="Enter your name ", foreground="red", background="pink", font=("Arial",14)).pack()
 entry_your_name = Entry(window, textvariable=yourName).pack()
 break_line()
 partner_name = Label(text="Enter partner name ", foreground="red", background="pink", font=("Arial",14)).pack()
 entry_partner_name = Entry(window, textvariable=partnerName).pack()
 break_line()
-same_gender = Radiobutton(window, text = "Both are of same gender", variable=Gender, value="same").pack()
-diff_gender = Radiobutton(window, text = "Both are of diff gender", variable=Gender, value="different").pack()
+same_gender = Radiobutton(window, text = "Both are of same gender", variable=Gender, value="same", foreground="red", background="pink").pack()
+diff_gender = Radiobutton(window, text = "Both are of diff gender", variable=Gender, value="different", foreground="red", background="pink").pack()
 break_line()
-btn = Button(text="Calculate", command= calculate ).pack()
+btn = Button(text="Calculate", command= calculate, foreground="pink", background="red" ).pack()
+break_line()
+note = Label(window, text="This is only for fun. Don't take it seriously").pack()
+
 window.mainloop()
