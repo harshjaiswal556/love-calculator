@@ -7,6 +7,8 @@ Love Calculator is a GUI based calculator which helps to calculate the love perc
 <strong>Python</strong>
 ### Module used
 <strong>tkinter</strong>
+<br>
+<strong>mysql-connector-python</strong>
 
 ## How to run locally
 
@@ -28,6 +30,9 @@ First make sure that you have successfully installed python on your system.
 Then open command prompt
 ```sh
 $ pip install tk
+```
+```sh
+$ pip install mysql-connector-python
 ```
 
 ## Now you are ready to run
