@@ -1,9 +1,14 @@
-from textwrap import fill
+import mysql.connector as c 
 from tkinter import *
 from PIL import ImageTk, Image
 window = Tk()
 
-window.geometry("500x650")
+conn = c.connect(host = "localhost", user = "root", passwd = "Hsjaiswal.3110#", database = "pythondb")
+
+mycursor = conn.cursor()
+
+# table = "CREATE TABLE love (name VARCHAR(255), partner_name VARCHAR(255), gender VARCHAR(255), result INT)"
+# mycursor.execute(table)
 window.configure(background="pink")
 
 yourName = StringVar()
@@ -18,13 +23,16 @@ def calculate():
     name = yourName.get()
     pname = partnerName.get()
     gender = Gender.get()
-    Label(text=gender).pack()
 
     #CHECKING THE GENDER                   
     if(gender == "same"):
+        Label(text="Friendship").pack()
         Label(text= f"{name} 🤗 {pname}").pack()
+        gender = "same"
     else:
+        Label(text="Love").pack()
         Label(text= f"{name} ❤ {pname}").pack()
+        gender = "different"
 
     score = 0  
     vowels=["a","e","i","o","u"]  
@@ -70,6 +78,12 @@ def calculate():
     
     Label(text=f"{score}%").pack()
     
+    sql = "INSERT INTO love (name, partner_name, gender, result) VALUES (%s, %s, %s, %s)"
+    val = (name, pname, gender, score)
+
+    mycursor.execute(sql, val)
+    conn.commit()
+
 bg =ImageTk.PhotoImage(Image.open("E:\\python\\project\\love_calculator\\bg.jpg"))
 
 pic = Label(window, image=bg).place(x=0,y=0)
